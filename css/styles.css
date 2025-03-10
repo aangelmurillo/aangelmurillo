@@ -680,3 +680,8 @@ h1 {
     color: #9a4a49;
     text-align: center;
 }
+
+.txt-video {
+    color: #FFF;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
