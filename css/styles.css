@@ -376,7 +376,6 @@ h1 {
 .gallery-section {
     width: 100%;
     max-width: 1200px;
-    margin: 30px auto;
     padding: 20px;
 }
 
@@ -666,4 +665,18 @@ h1 {
     width: 100%;
     height: auto;
     object-fit: contain; /* Asegura que se vea completamente sin distorsión */
+}
+.btn-wha {
+    cursor: pointer;
+    background: none; /* Sin fondo */
+    border: none; /* Sin borde */
+    padding: 0; /* Sin relleno */
+    text-align: left; /* Alineación a la izquierda */
+    font: inherit; /* Hereda la fuente del contenedor */
+    color: inherit; /* Hereda el color del contenedor */
+    outline: none; /* Sin contorno de enfoque */
+    font-size: 1.5rem;
+    font-family: 'Lobster Two', sans-serif;
+    color: #9a4a49;
+    text-align: center;
 }

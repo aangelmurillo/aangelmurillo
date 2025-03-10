@@ -12,7 +12,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&display=swap"
         rel="stylesheet">
-    
+
     <style>
         /* Estilo adicional para asegurar que el video sea visible */
         .video-container {
@@ -21,14 +21,14 @@
             max-width: 100%;
             overflow: hidden;
         }
-        
+
         #miVideo {
             width: 100%;
             height: auto;
             display: block;
             max-width: 100%;
         }
-        
+
         /* Para dispositivos móviles */
         @media (max-width: 768px) {
             .video-container {
@@ -92,160 +92,183 @@
                 </div>
             </div>
         </div>
+
+        <!-- Gallery Section HTML -->
+        <div class="gallery-section">
+            <div class="gallery-header">
+                <h2>Mi Galería</h2>
+                <p>Recuerdos especiales</p>
+            </div>
+
+            <div class="gallery-tabs">
+                <button class="gallery-tab active" data-category="all">Todos</button>
+                <button class="gallery-tab" data-category="rosa">Mi Vestido</button>
+                <button class="gallery-tab" data-category="campesina"> Campesina</button>
+            </div>
+
+            <div class="gallery-container">
+                <div class="gallery-item" data-category="rosa">
+                    <div class="gallery-image">
+                        <img src="img/vestido-rosa-1.jpeg">
+                        <div class="image-overlay">
+                            <span class="zoom-icon">+</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="rosa">
+                    <div class="gallery-image">
+                        <img src="img/vestido-rosa-2.jpeg">
+                        <div class="image-overlay">
+                            <span class="zoom-icon">+</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="campesina">
+                    <div class="gallery-image">
+                        <img src="img/campesina-1.jpeg">
+                        <div class="image-overlay">
+                            <span class="zoom-icon">+</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="gallery-item" data-category="campesina">
+                    <div class="gallery-image">
+                        <img src="img/campesina-2.jpeg">
+                        <div class="image-overlay">
+                            <span class="zoom-icon">+</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lightbox for viewing images -->
+        <div class="lightbox" id="lightbox">
+            <span class="close-lightbox">&times;</span>
+            <div class="lightbox-img-container">
+                <img class="lightbox-content" id="lightbox-img">
+            </div>
+            <div class="lightbox-controls">
+                <span class="lightbox-prev">&#10094;</span>
+                <span class="lightbox-next">&#10095;</span>
+            </div>
+        </div>
+
+        <div class="video-text">
+            <button class="btn-wha" id="whatsappButton" >Confirmar mi asistencia en WhatsApp</button>
+            <!-- Contenedor de confirmación -->
+            <div class="confirma-tu-invitacion"></div>
+        </div>
     </div>
 
-    <!-- Gallery Section HTML -->
-<div class="gallery-section">
-    <div class="gallery-header">
-        <h2>Mi Galería</h2>
-        <p>Recuerdos especiales</p>
-    </div>
-    
-    <div class="gallery-tabs">
-        <button class="gallery-tab active" data-category="all">Todos</button>
-        <button class="gallery-tab" data-category="rosa">Mi Vestido</button>
-        <button class="gallery-tab" data-category="campesina"> Campesina</button>
-    </div>
-    
-    <div class="gallery-container">
-        <div class="gallery-item" data-category="rosa">
-            <div class="gallery-image">
-                <img src="img/vestido-rosa-1.jpeg">
-                <div class="image-overlay">
-                    <span class="zoom-icon">+</span>
-                </div>
-            </div>
-        </div>
-        
-        <div class="gallery-item" data-category="rosa">
-            <div class="gallery-image">
-                <img src="img/vestido-rosa-2.jpeg">
-                <div class="image-overlay">
-                    <span class="zoom-icon">+</span>
-                </div>
-            </div>
-        </div>
-        
-        <div class="gallery-item" data-category="campesina">
-            <div class="gallery-image">
-                <img src="img/campesina-1.jpeg">
-                <div class="image-overlay">
-                    <span class="zoom-icon">+</span>
-                </div>
-            </div>
-        </div>
-        
-        <div class="gallery-item" data-category="campesina">
-            <div class="gallery-image">
-                <img src="img/campesina-2.jpeg">
-                <div class="image-overlay">
-                    <span class="zoom-icon">+</span>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 
-<!-- Lightbox for viewing images -->
-<div class="lightbox" id="lightbox">
-    <span class="close-lightbox">&times;</span>
-    <div class="lightbox-img-container">
-        <img class="lightbox-content" id="lightbox-img">
-    </div>
-    <div class="lightbox-controls">
-        <span class="lightbox-prev">&#10094;</span>
-        <span class="lightbox-next">&#10095;</span>
-    </div>
-</div>
+    <!-- JavaScript for Gallery Functionality -->
+    <script>
+        // Obtener el botón y el div de confirmación
+        const whatsappButton = document.getElementById('whatsappButton');
+        const confirmaDiv = document.querySelector('.confirma-tu-invitacion');
 
-<!-- JavaScript for Gallery Functionality -->
-<script>
-    // Gallery Filtering
-    const galleryTabs = document.querySelectorAll('.gallery-tab');
-    const galleryItems = document.querySelectorAll('.gallery-item');
-    
-    galleryTabs.forEach(tab => {
-        tab.addEventListener('click', () => {
-            // Remove active class from all tabs
-            galleryTabs.forEach(t => t.classList.remove('active'));
-            
-            // Add active class to clicked tab
-            tab.classList.add('active');
-            
-            // Get selected category
-            const category = tab.dataset.category;
-            
-            // Filter gallery items
-            galleryItems.forEach(item => {
-                if (category === 'all' || item.dataset.category === category) {
-                    item.style.display = 'block';
-                    
-                    // Animation effect
-                    setTimeout(() => {
-                        item.style.opacity = '1';
-                        item.style.transform = 'scale(1)';
-                    }, 50);
-                } else {
-                    item.style.opacity = '0';
-                    item.style.transform = 'scale(0.8)';
-                    
-                    setTimeout(() => {
-                        item.style.display = 'none';
-                    }, 300);
-                }
+        // Enlace de WhatsApp con un mensaje predefinido
+        const whatsappLink = "https://wa.me/528711250564?text=¡Hola!%20Confirmo%20mi%20asistencia%20a%20los%20quince%20años%20de%20Melissa%20Alahine.";
+
+        // Agregar un evento al botón
+        whatsappButton.addEventListener('click', function () {
+            // Mostrar el mensaje de confirmación en el div
+            confirmaDiv.innerHTML = "<p>¡Gracias por confirmar tu asistencia!</p>";
+
+            // Redirigir al enlace de WhatsApp
+            window.open(whatsappLink, '_blank');
+        });
+
+        // Gallery Filtering
+        const galleryTabs = document.querySelectorAll('.gallery-tab');
+        const galleryItems = document.querySelectorAll('.gallery-item');
+
+        galleryTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs
+                galleryTabs.forEach(t => t.classList.remove('active'));
+
+                // Add active class to clicked tab
+                tab.classList.add('active');
+
+                // Get selected category
+                const category = tab.dataset.category;
+
+                // Filter gallery items
+                galleryItems.forEach(item => {
+                    if (category === 'all' || item.dataset.category === category) {
+                        item.style.display = 'block';
+
+                        // Animation effect
+                        setTimeout(() => {
+                            item.style.opacity = '1';
+                            item.style.transform = 'scale(1)';
+                        }, 50);
+                    } else {
+                        item.style.opacity = '0';
+                        item.style.transform = 'scale(0.8)';
+
+                        setTimeout(() => {
+                            item.style.display = 'none';
+                        }, 300);
+                    }
+                });
             });
         });
-    });
-    
-    // Lightbox Functionality
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightbox-img');
-    const closeBtn = document.querySelector('.close-lightbox');
-    const lightboxPrev = document.querySelector('.lightbox-prev');
-    const lightboxNext = document.querySelector('.lightbox-next');
-    
-    let currentImageIndex = 0;
-    const images = document.querySelectorAll('.gallery-image img');
-    
-    // Open lightbox when clicking on an image
-    document.querySelectorAll('.gallery-image').forEach((item, index) => {
-        item.addEventListener('click', () => {
-            currentImageIndex = index;
-            const imgSrc = item.querySelector('img').src;
-            openLightbox(imgSrc);
+
+        // Lightbox Functionality
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const closeBtn = document.querySelector('.close-lightbox');
+        const lightboxPrev = document.querySelector('.lightbox-prev');
+        const lightboxNext = document.querySelector('.lightbox-next');
+
+        let currentImageIndex = 0;
+        const images = document.querySelectorAll('.gallery-image img');
+
+        // Open lightbox when clicking on an image
+        document.querySelectorAll('.gallery-image').forEach((item, index) => {
+            item.addEventListener('click', () => {
+                currentImageIndex = index;
+                const imgSrc = item.querySelector('img').src;
+                openLightbox(imgSrc);
+            });
         });
-    });
-    
-    // Close lightbox
-    closeBtn.addEventListener('click', () => {
-        lightbox.style.display = 'none';
-    });
-    
-    // Navigate to previous image
-    lightboxPrev.addEventListener('click', () => {
-        currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
-        lightboxImg.src = images[currentImageIndex].src;
-    });
-    
-    // Navigate to next image
-    lightboxNext.addEventListener('click', () => {
-        currentImageIndex = (currentImageIndex + 1) % images.length;
-        lightboxImg.src = images[currentImageIndex].src;
-    });
-    
-    // Function to open lightbox
-    function openLightbox(src) {
-        lightboxImg.src = src;
-        lightbox.style.display = 'flex';
-    }
-    
-    // Close lightbox when clicking outside the image
-    lightbox.addEventListener('click', (e) => {
-        if (e.target === lightbox) {
+
+        // Close lightbox
+        closeBtn.addEventListener('click', () => {
             lightbox.style.display = 'none';
+        });
+
+        // Navigate to previous image
+        lightboxPrev.addEventListener('click', () => {
+            currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+            lightboxImg.src = images[currentImageIndex].src;
+        });
+
+        // Navigate to next image
+        lightboxNext.addEventListener('click', () => {
+            currentImageIndex = (currentImageIndex + 1) % images.length;
+            lightboxImg.src = images[currentImageIndex].src;
+        });
+
+        // Function to open lightbox
+        function openLightbox(src) {
+            lightboxImg.src = src;
+            lightbox.style.display = 'flex';
         }
-    });
-</script>
+
+        // Close lightbox when clicking outside the image
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) {
+                lightbox.style.display = 'none';
+            }
+        });
+    </script>
 
     <script>
         // Countdown functionality
@@ -275,4 +298,5 @@
         }, 1000);
     </script>
 </body>
+
 </html>
