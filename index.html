@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mis XV Melissa</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="shortcut icon" href="img/icono-princesa.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&family=Lobster+Two:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+        rel="stylesheet">
+    
+    <style>
+        /* Estilo adicional para asegurar que el video sea visible */
+        .video-container {
+            position: relative;
+            width: 100%;
+            max-width: 100%;
+            overflow: hidden;
+        }
+        
+        #miVideo {
+            width: 100%;
+            height: auto;
+            display: block;
+            max-width: 100%;
+        }
+        
+        /* Para dispositivos móviles */
+        @media (max-width: 768px) {
+            .video-container {
+                height: auto;
+                min-height: 200px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main-container">
+        <!-- Header Section -->
+        <div class="header-container">
+            <div class="mis-quinces">
+                <h2>Mis quince años</h2>
+                <h1>Melissa Alahine</h1>
+                <p class="fecha">Vier. 28 de Marzo 2025</p>
+            </div>
+        </div>
+
+        <!-- Featured Video Section -->
+        <div class="featured-section">
+            <div class="video-text">
+                <h2>¡Mira mi video!</h2>
+                <p>Prepárate para celebrar</p>
+            </div>
+
+            <div class="video-container">
+                <!-- Video optimizado para reproducción automática en móviles -->
+                <video id="miVideo" controls preload="auto" poster="img/poster.png">
+                    <source src="videos/video-hmna-luna.mp4" type="video/mp4">
+                </video>
+            </div>
+        </div>
+
+        <!-- Countdown Section -->
+        <div class="countdown-section">
+            <div class="countdown-container">
+                <h1 class="title">¡solo faltan!</h1>
+                <div class="countdown">
+                    <div class="countdown-item">
+                        <div id="days" class="countdown-value">13</div>
+                        <div class="countdown-label">días</div>
+                    </div>
+                    <div class="countdown-separator">:</div>
+                    <div class="countdown-item">
+                        <div id="hours" class="countdown-value">01</div>
+                        <div class="countdown-label">horas</div>
+                    </div>
+                    <div class="countdown-separator">:</div>
+                    <div class="countdown-item">
+                        <div id="minutes" class="countdown-value">22</div>
+                        <div class="countdown-label">minutos</div>
+                    </div>
+                    <div class="countdown-separator">:</div>
+                    <div class="countdown-item">
+                        <div id="seconds" class="countdown-value">32</div>
+                        <div class="countdown-label">segundos</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gallery Section HTML -->
+<div class="gallery-section">
+    <div class="gallery-header">
+        <h2>Mi Galería</h2>
+        <p>Recuerdos especiales</p>
+    </div>
+    
+    <div class="gallery-tabs">
+        <button class="gallery-tab active" data-category="all">Todos</button>
+        <button class="gallery-tab" data-category="rosa">Mi Vestido</button>
+        <button class="gallery-tab" data-category="campesina"> Campesina</button>
+    </div>
+    
+    <div class="gallery-container">
+        <div class="gallery-item" data-category="rosa">
+            <div class="gallery-image">
+                <img src="img/vestido-rosa-1.jpeg">
+                <div class="image-overlay">
+                    <span class="zoom-icon">+</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="gallery-item" data-category="rosa">
+            <div class="gallery-image">
+                <img src="img/vestido-rosa-2.jpeg">
+                <div class="image-overlay">
+                    <span class="zoom-icon">+</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="gallery-item" data-category="campesina">
+            <div class="gallery-image">
+                <img src="img/campesina-1.jpeg">
+                <div class="image-overlay">
+                    <span class="zoom-icon">+</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="gallery-item" data-category="campesina">
+            <div class="gallery-image">
+                <img src="img/campesina-2.jpeg">
+                <div class="image-overlay">
+                    <span class="zoom-icon">+</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Lightbox for viewing images -->
+<div class="lightbox" id="lightbox">
+    <span class="close-lightbox">&times;</span>
+    <div class="lightbox-img-container">
+        <img class="lightbox-content" id="lightbox-img">
+    </div>
+    <div class="lightbox-controls">
+        <span class="lightbox-prev">&#10094;</span>
+        <span class="lightbox-next">&#10095;</span>
+    </div>
+</div>
+
+<!-- JavaScript for Gallery Functionality -->
+<script>
+    // Gallery Filtering
+    const galleryTabs = document.querySelectorAll('.gallery-tab');
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    
+    galleryTabs.forEach(tab => {
+        tab.addEventListener('click', () => {
+            // Remove active class from all tabs
+            galleryTabs.forEach(t => t.classList.remove('active'));
+            
+            // Add active class to clicked tab
+            tab.classList.add('active');
+            
+            // Get selected category
+            const category = tab.dataset.category;
+            
+            // Filter gallery items
+            galleryItems.forEach(item => {
+                if (category === 'all' || item.dataset.category === category) {
+                    item.style.display = 'block';
+                    
+                    // Animation effect
+                    setTimeout(() => {
+                        item.style.opacity = '1';
+                        item.style.transform = 'scale(1)';
+                    }, 50);
+                } else {
+                    item.style.opacity = '0';
+                    item.style.transform = 'scale(0.8)';
+                    
+                    setTimeout(() => {
+                        item.style.display = 'none';
+                    }, 300);
+                }
+            });
+        });
+    });
+    
+    // Lightbox Functionality
+    const lightbox = document.getElementById('lightbox');
+    const lightboxImg = document.getElementById('lightbox-img');
+    const closeBtn = document.querySelector('.close-lightbox');
+    const lightboxPrev = document.querySelector('.lightbox-prev');
+    const lightboxNext = document.querySelector('.lightbox-next');
+    
+    let currentImageIndex = 0;
+    const images = document.querySelectorAll('.gallery-image img');
+    
+    // Open lightbox when clicking on an image
+    document.querySelectorAll('.gallery-image').forEach((item, index) => {
+        item.addEventListener('click', () => {
+            currentImageIndex = index;
+            const imgSrc = item.querySelector('img').src;
+            openLightbox(imgSrc);
+        });
+    });
+    
+    // Close lightbox
+    closeBtn.addEventListener('click', () => {
+        lightbox.style.display = 'none';
+    });
+    
+    // Navigate to previous image
+    lightboxPrev.addEventListener('click', () => {
+        currentImageIndex = (currentImageIndex - 1 + images.length) % images.length;
+        lightboxImg.src = images[currentImageIndex].src;
+    });
+    
+    // Navigate to next image
+    lightboxNext.addEventListener('click', () => {
+        currentImageIndex = (currentImageIndex + 1) % images.length;
+        lightboxImg.src = images[currentImageIndex].src;
+    });
+    
+    // Function to open lightbox
+    function openLightbox(src) {
+        lightboxImg.src = src;
+        lightbox.style.display = 'flex';
+    }
+    
+    // Close lightbox when clicking outside the image
+    lightbox.addEventListener('click', (e) => {
+        if (e.target === lightbox) {
+            lightbox.style.display = 'none';
+        }
+    });
+</script>
+
+    <script>
+        // Countdown functionality
+        const countDownDate = new Date("Mar 28, 2025 00:00:00").getTime();
+
+        const countdown = setInterval(function () {
+            const currentDate = new Date().getTime();
+            const distance = countDownDate - currentDate;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("days").innerHTML = days.toString().padStart(2, '0');
+            document.getElementById("hours").innerHTML = hours.toString().padStart(2, '0');
+            document.getElementById("minutes").innerHTML = minutes.toString().padStart(2, '0');
+            document.getElementById("seconds").innerHTML = seconds.toString().padStart(2, '0');
+
+            if (distance < 0) {
+                clearInterval(countdown);
+                document.getElementById("days").innerHTML = "00";
+                document.getElementById("hours").innerHTML = "00";
+                document.getElementById("minutes").innerHTML = "00";
+                document.getElementById("seconds").innerHTML = "00";
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
